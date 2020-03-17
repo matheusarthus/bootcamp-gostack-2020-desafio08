@@ -1,0 +1,155 @@
+--INICIANDO PROJETO
+  -> yarn add react-native-cli
+  -> react-native initi *nome_do_projeto*
+
+--RODANDO O PROJETO
+  -> react-native start
+    -> react-native run-android
+
+--CONFIGURANDO FERRAMENTAS DE GUIA DE ESTILO
+  ->Criar '.editorconfig'
+    ->Configurar
+  ->Excluir '.eslint.js'
+  ->Instalar eslint
+    ->yarn add eslint -D
+  ->Iniciar configurações
+    ->yarn eslint --init
+  ->Excluir 'package-lock.json'
+  ->Executar comando 'yarn'
+  ->Instalar 'prettier' e demais plugins
+    ->yarn add prettier eslint-config-prettier eslint-plugin-prettier babel-eslint -D
+  ->Configurar '.eslintrc.js'
+  ->Criar e configurar '.prettierrc'
+
+--CONFIGURANDO DEBUG COM REACTOTRON
+  ->Baixar app do Reactotron do repositório do github
+  ->Instalar pacote
+    ->yarn add reactotron-react-native
+  ->Criar pasta 'src'
+    ->Criar arquivo 'index.js'
+      ->Transferir conteúdo do 'App.js' para 'index.js'
+        ->Excluir o 'App.js'
+          ->Configirar o 'index.js' da pasta raiz
+  ->Criar pasta 'config'
+    ->Criar arquivo 'ReactotronConfig.js'
+      ->Configurar 'Reactotron'
+        ->Configurar 'ip'
+        ->Redirecionar porta:
+          ->adb reverse tcp:9090 tcp:9090
+        ->Configurar 'eslint' para aceitar a variável '__DEV__'
+      ->Importar 'ReactotronConfig.js' no 'src/index.js'
+
+--CRIAR REACT NAVIGATION
+  ->Criar pasta 'pages' em 'src'
+    ->Criar pasta 'Home'
+      ->Criar arquivo 'index.js'
+        ->rnfc
+    ->Criar pasta 'Cart
+      ->Criar arquivo 'index.js'
+        ->rnfc
+  ->Criar arquivo 'routes.js'
+  ->Instalar lib do 'react-navigation'
+    ->yarn add @react-navigation/native
+    ->yarn add react-native-reanimated react-native-gesture-handler react-native-screens react-native-safe-area-context @react-native-community/masked-view
+    ->yarn add @react-navigation/stack
+    ->yarn add @react-navigation/bottom-tabs
+    ->Adicionar dependências em 'android/app/build.gradle'
+      ->implementation 'androidx.appcompat:appcompat:1.1.0-rc01'
+      ->implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0-alpha02'
+  ->Configurar 'routes.js'
+    ->Configurar 'src/index.js'
+
+--INSTALAR STYLED COMPONENTS
+  ->yarn add styled-components
+  ->Criar arquivos 'styles.js' nas pastas dos components
+    ->styled-rn
+  ->Configurar os 'index.js' dos components
+
+--CRIANDO E ESTILIZANDO O HEADER
+  ->Criar pasta 'assets'
+    ->Criar pasta 'images'
+      ->Importar imagem do header
+  ->Criar pasta 'componentes'
+    ->Criar pasta 'Header'
+      ->Criar arquivos 'index.js' e 'styles.js'
+        ->rnfc e styled-rn
+  ->Criar pasta 'styles' em 'src'
+    ->Criar arquivo 'colors.js' para setar as cores default do app
+  ->Instalar pacote de ícones
+    ->yarn add react-native-vector-icons
+      ->Configurar arquivo 'android/app/build.gradle'
+
+--CONFIGURANDO API
+  ->Intalar biblioteca 'json-server'
+    ->yarn global add json-server
+    ->Importar o arquivo 'server.json'
+    ->Instalar o 'axios'
+      ->yarn add axios
+    ->Criar pasta 'services'
+      ->Criar arquivo 'api.js'
+        ->Configurar 'api'
+    ->Rodar 'api'
+      ->npx json-server server.json -p 3333
+    ->Comando que fez a 'api' funcionar:
+      ->adb reverse tcp:3333 tcp:3333
+
+--CRIANDO FUNÇÃO DE FORMATAÇÃO DE MOEDA
+  ->Criar pasta 'util' em 'src'
+    ->Criar arquivo 'format.js'
+
+--CONFIGURANDO COMPONENTS
+  ->Instalar a lib 'polished'
+    ->yarn add polished
+  ->Configurar 'HOME'
+  ->Configurar 'CART'
+
+--CONFIGURAR O REDUX
+  ->Instalar o pacote 'Redux'
+    ->yarn add redux react-redux
+  ->Criar pasta 'store' em 'src'
+    ->Criar arquivo 'index.js'
+      ->Configurar arquivo
+  ->Configurar <Provider> no arquivo 'src/index.js'
+  ->Criar os 'reducers'
+    ->Criar pasta 'module' em 'store'
+      ->Criar pasta 'cart'
+        ->Criar arquivo 'reducer.js'
+      ->Criar arquivo 'rootReducer.js'
+        ->Configurar arquivo
+
+--INTEGRAR REACTOTRON COM REDUX
+  ->yarn add reactotron-react-js reactotron-redux
+
+--IMPLEMENTAR REDUX NO COMPONENT 'HEADER'
+  ->Importar { connect } from 'react-redux' para o 'Header/index.js'
+
+--IMPLEMENTAR REDUX NO COMPONENT 'HOME'
+  ->Importar { connect } from 'react-redux' para o 'Home/index.js'
+
+--IMPLEMENTAR REDUX NO COMPONENT 'CART' E AS FUNCIONALIDADES
+  ->Instalar ferramenta 'immer', que auxilia na manipulação dos estados
+    ->yarn add immer
+  ->Alterar 'reducer' do 'cart'
+  ->Importar { connect } from 'react-redux' para o 'Cart/index.js'
+
+--REFATORAR AS ACTIONS
+  ->Criar arquivo 'actions.js' em 'modules/cart'
+    ->Configurar arquivo
+
+--CONFIGURANDO REDUX SAGA
+  ->Instalar o 'redux-saga'
+    ->yarn add redux-saga
+    ->Criar pasta 'sagas.js' em 'store/modules/cart'
+      ->Configurar arquivo
+    ->Criar arquivo 'rootSaga.js'
+      ->Configurar arquivo
+
+-INTEGRAR REACTOTRON COM O REDUX SAGA
+  ->yarn add reactotron-redux-saga
+
+--NAVEGANDO NO SAGA
+  ->Criar arquivo 'RootNavigation.js' em 'services'
+    ->Configurar arquivo
+  ->Passar o 'RootNavigation.js' como referência no <NavigationContainer ref={navigationRef}>
+    do arquivo 'src/index.js'
+  ->Importar 'RootNavigation.navigate();' para dentro dos arquivos que necessitar de navegação.
